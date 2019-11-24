@@ -2,11 +2,13 @@
 
 Welcome to the [airtunnel](https://github.com/joerg-schneider/airtunnel) demo project.
 
-## Prerequisites
+## Prerequisites for airtunnel with PySpark
 To get started, make sure you have **at least Python 3.6** installed on your system
 and are familiar with the basics of [Apache Airflow](https://airflow.apache.org/) and 
 [Python virtual environments](https://docs.python.org/3/library/venv.html). Also check out
 the [airtunnel documentation](https://joerg-schneider.github.io/airtunnel).
+
+*Make sure you have Java properly installed for PySpark!*
 
 ## Initial Setup
 
@@ -32,11 +34,13 @@ in it:
     python -m venv airtunnel-env
     # we activate it:
     source airtunnel-env/bin/activate
-    # we install airtunnel in it - this will also install Airflow & Pandas & PyArrow
+    # we install airtunnel in it - this will also install Airflow, Pandas, PyArrow
     pip install airtunnel
+    # install PySpark
+    pip install pyspark
     ```
     (alternatively any other means of creating and activating a Python venv will do, i.e. from PyCharm!)
-   
+    
     *For the next steps, please keep this venv activated!*
     
 5. Set your AIRFLOW_HOME environment variable to the absolute path ending at the `airflow-home` folder of the demo 
@@ -58,9 +62,9 @@ shell:
 `airflow scheduler`
 
 3. Navigate to the (hopefully running) Airflow webserver at: http://localhost:8080. You should see the example
-airtunnel DAG called "university"
+airtunnel DAG called "university_pyspark"
 
-4. Set the "university" DAG to "On" and trigger a run manually be clicking "Trigger DAG".
+4. Set the "university_pyspark" DAG to "On" and trigger a run manually be clicking "Trigger DAG".
 
 5. It should start processing the dummy data we already have provided with the repo under `data_store/ingest/landing`
 
@@ -68,38 +72,7 @@ airtunnel DAG called "university"
 When the demo run has finished, your local data store should look like:
 
 ```
-├── archive
-├── ingest
-│   ├── archive
-│   │   ├── enrollment
-│   │   │   └── 2019-11-24T06_55_03.655207+00_00
-│   │   │       └── enrollment_1.csv
-│   │   ├── programme
-│   │   │   └── 2019-11-24T06_55_03.655207+00_00
-│   │   │       ├── programme_1.csv
-│   │   │       └── programme_2.csv
-│   │   └── student
-│   │       └── 2019-11-24T06_55_03.655207+00_00
-│   │           └── student.csv
-│   └── landing
-│       ├── enrollment
-│       ├── programme
-│       └── student
-├── ready
-│   ├── enrollment
-│   │   └── enrollment.parquet.gzip
-│   ├── enrollment_summary
-│   │   └── enrollment_summary.parquet.gzip
-│   ├── programme
-│   │   └── programme.parquet.gzip
-│   └── student
-│       └── student.parquet.gzip
-└── staging
-    ├── pickedup
-    │   ├── enrollment
-    │   ├── programme
-    │   └── student
-    └── ready
+
 ```
 
 You can see, the data associated with the three example input data assets has been ingested and archived under the
