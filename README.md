@@ -72,11 +72,52 @@ airtunnel DAG called "university_pyspark"
 When the demo run has finished, your local data store should look like:
 
 ```
-
+├── archive
+├── ingest
+│   ├── archive
+│   │   ├── enrollment_pyspark
+│   │   │   └── 2019-11-24T07_56_03.476274+00_00
+│   │   │       └── enrollment_1.csv
+│   │   ├── programme_pyspark
+│   │   │   └── 2019-11-24T07_56_03.476274+00_00
+│   │   │       ├── programme_1.csv
+│   │   │       └── programme_2.csv
+│   │   └── student_pyspark
+│   │       └── 2019-11-24T07_56_03.476274+00_00
+│   │           └── student.csv
+│   └── landing
+│       ├── enrollment_pyspark
+│       ├── programme_pyspark
+│       └── student_pyspark
+├── ready
+│   ├── enrollment_pyspark
+│   │   ├── _SUCCESS
+│   │   └── part-00000-efd5b172-afdc-45ea-9167-671145dc8ebe-c000.gz.parquet
+│   ├── enrollment_summary_pyspark
+│   │   ├── _SUCCESS
+│   │   ├── part-00000-3e8c4dd8-5579-4c15-837b-8ffb32b65ba9-c000.gz.parquet
+│   │   ├── part-00147-3e8c4dd8-5579-4c15-837b-8ffb32b65ba9-c000.gz.parquet
+│   │   ├── part-00171-3e8c4dd8-5579-4c15-837b-8ffb32b65ba9-c000.gz.parquet
+│   │   └── part-00191-3e8c4dd8-5579-4c15-837b-8ffb32b65ba9-c000.gz.parquet
+│   ├── programme_pyspark
+│   │   ├── _SUCCESS
+│   │   ├── part-00000-f33df643-2abf-4a0a-8765-6c18e25b3264-c000.gz.parquet
+│   │   ├── part-00043-f33df643-2abf-4a0a-8765-6c18e25b3264-c000.gz.parquet
+│   │   ├── part-00051-f33df643-2abf-4a0a-8765-6c18e25b3264-c000.gz.parquet
+│   │   └── part-00174-f33df643-2abf-4a0a-8765-6c18e25b3264-c000.gz.parquet
+│   └── student_pyspark
+│       ├── _SUCCESS
+│       └── part-00000-1ea736be-f6b0-4eca-846b-eac43952f90b-c000.gz.parquet
+└── staging
+    ├── pickedup
+    │   ├── enrollment_pyspark
+    │   ├── programme_pyspark
+    │   └── student_pyspark
+    └── ready
 ```
 
 You can see, the data associated with the three example input data assets has been ingested and archived under the
-timestamp of the run and the final output data has been prepared within `ready` as parquet.gzip files.
+timestamp of the run and the final output data has been prepared within `ready` as gz.parquet files.
 
 **Congrats, you have successfully used airtunnel!**
 
