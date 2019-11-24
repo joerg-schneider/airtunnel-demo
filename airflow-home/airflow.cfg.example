@@ -1,0 +1,25 @@
+[core]
+dags_folder = <ABSOLUTE-PATH-TO-YOUR-AIRTUNNEL-DEMO-FOLDER>/airtunnel-demo/dags
+sql_alchemy_conn = sqlite:///<ABSOLUTE-PATH-TO-YOUR-AIRTUNNEL-DEMO-FOLDER>/airtunnel-demo/airflow-home/airflow.db
+default_timezone = utc
+executor = SequentialExecutor
+load_examples = False
+
+# just an example key, not for production use!:
+fernet_key = vbboJzgaufRGqkEjAVufAB7oei5jRZ1X5MLLeGkVI2U=
+
+[airtunnel]
+declarations_folder = <ABSOLUTE-PATH-TO-YOUR-AIRTUNNEL-DEMO-FOLDER>/airtunnel-demo/declarations
+data_store_folder = <ABSOLUTE-PATH-TO-YOUR-AIRTUNNEL-DEMO-FOLDER>/airtunnel-demo/data_store/
+scripts_folder = <ABSOLUTE-PATH-TO-YOUR-AIRTUNNEL-DEMO-FOLDER>/airtunnel-demo/scripts/
+
+# we use the default settings for a local data store & metadata being written on the Airflow DB:
+data_store_adapter_class = airtunnel.data_store.LocalDataStoreAdapter
+meta_adapter_class = airtunnel.metadata.adapter.SQLMetaAdapter
+meta_adapter_hook_factory = airtunnel.metadata.adapter.DefaultSQLHookFactory
+
+[scheduler]
+# we reduced this from 5 down to 1 to speed up the examples:
+job_heartbeat_sec = 1
+# we reduced this from 5 down to 1 to speed up the examples:
+scheduler_heartbeat_sec = 1
